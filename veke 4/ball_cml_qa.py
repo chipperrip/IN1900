@@ -25,6 +25,6 @@ y = v0*t - 0.5*g*t**2
 print ('%g' %(y))
 
 """
-Terminal>   python ball_cml.py 0.6 3
+Terminal> python ball_cml.py 0.6 3
 0.0342
 """
