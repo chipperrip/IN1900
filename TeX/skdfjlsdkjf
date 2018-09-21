@@ -1,0 +1,16 @@
+\documentclass[11pt,a4]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+\title{om \Tex og \LaTeX}
+\author{Knut Mørken}
+\maketitle
+
+\section*{Innledning}
+Hei
+\section*{Litt matematikk}
+
+En funksjon skrives som $f(x)=sinx
+
+end{document}

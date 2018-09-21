@@ -1,0 +1,41 @@
+Loops -
+  while
+  for
+
+Boolean expressions ( true false )
+
+Lists
+
+#as long as condition is true:
+while condition:
+  <statement 1>
+  <statement 2>
+  ...
+
+<first statement after loop>
+
+indentation in python is important
+loop ends when non-indented statement is encountered
+
+
+Lists : objects for storing a bunch of shit
+
+lists are type flexible in python
+
+
+L1 = [-91, 'a string', 7.2, 0]
+
+indices go from 0,1,2,...,len(L1-1)
+
+append, extend, length
+
+append : add element at the end of a list
+
+extend at the end:
+
+C = [a,b,c]
+C = C + [d,e]
+
+len(C) length of list, number of elements
+
+for
