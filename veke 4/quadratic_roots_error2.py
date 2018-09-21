@@ -35,11 +35,21 @@ except IndexError as error:
 	b = float(input('b  = ? '))
 	c = float(input('c  = ? '))
 
+except ValueError as error:
+
+	print('Error, non-number input detected.\n')
+	print('Please input values for a quadratic equation:\n')
+
+	#user input for a,b,c values
+	a = float(input('a  = ? '))
+	b = float(input('b  = ? '))
+	c = float(input('c  = ? '))
+
 # Check if our values give real roots
 numberIsComplex = ((b**2)-(4*a*c)) < 0
 
 if numberIsComplex:
-	print ('\nGiven a, b, c values result in a complex number! Aborting...\n')
+	print ('\nGiven a, b, c values result in complex solutions! Aborting...\n')
 	quit()
 
 
@@ -59,7 +69,6 @@ def quad_eq(a, b, c):
 
 	return x
 
-
 x = quad_eq(a, b, c)
 
 print()
@@ -76,6 +85,21 @@ a  =  1.00
 b  =  1.00
 c  =  1.00
 
-Given a, b, c values result in a complex number! Aborting...
+Given a, b, c values result in complex solutions! Aborting...
+ 
+Terminal> python quadratic_roots_error2.py 1 3 e
+
+Exercise 4.3 Quadratic fixed:
+
+Error, non-number input detected.
+
+Please input values for a quadratic equation:
+
+a  = ? 1
+b  = ? 3
+c  = ? -4
+
+x+ =  1.00
+x- = -4.00
 
 """
