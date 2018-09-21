@@ -40,8 +40,8 @@ except IndexError as error:
 """
 function for calculating the quadratic equation given a,b,c
 returns a list with two elements
-x[0] is the positive sqrt variant x+
-x[1] is the negative sqrt variant x-
+x[0] is the +sqrt variant x+
+x[1] is the -sqrt variant x-
 """
 def quad_eq(a, b, c):
 
