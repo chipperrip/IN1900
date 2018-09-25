@@ -1,5 +1,3 @@
-import math
-
 """
 Vi skal sjå på differenslikninga
 xn+2 −2xn+1 − xn = 0
@@ -10,6 +8,8 @@ xn+2 = 2xn+1 + xn
 i Oppgåve a) er x0 = 1 og x1 = 2.
 i Oppgåve b) er x0 = 1 og x1 = 1-sqrt(2)
 """
+
+import math
 
 #startverdiar
 x0 = 1
@@ -34,23 +34,19 @@ def difflik (x0, x1):
 	for i in range (n, 101):
 		#kalkuler neste verdi i rekkja
 		x = (2*xp)+xpp
-
-		print('x%g = %g' %(n, x))
-		#generell_løysing(n)
-
+        gn = generell_loysing(n)
+        print('x%g = %g, exact = %g, difference = %g' %(n, x, gn, math.abs(gn - x)))
+		#generell_loysing(n)
 		#inkrementer n verdien
 		n += 1
-
 		#gå vidare i rekkja
 		xpp = xp
 		xp = x
 
 
-def generell_løysing (n):
-
+def generell_loysing(n):
 	xn = (1-math.sqrt(2))**n
-
-	print ('x%g = %g' %(n, xn))
+	return xn
 """
 print('Oppgåve 1a)')
 print('\n\nx0 = 1, x1 = 2\n')
@@ -59,6 +55,7 @@ difflik(x0, x1a)
 print('Oppgåve 1b)')
 print('\n\nx0 = 1, x1 = 1-sqrt(2)\n')
 difflik(x0, x1b)
-
+"""
 for i in range (0, 101):
-	generell_løysing(i)
+	generell_loysing(i)
+"""
