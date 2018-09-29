@@ -16,3 +16,9 @@ for i in range(N):
 
 print (100. * antfeil/N)
 print (x0, y0, z0, ikkeass1 - ikkeass2)
+
+"""
+TERMINAL> python Oppgave3b.py
+31.044
+0.8458117545490976 0.9426991435326402 0.8341727472841748 -2.220446049250313e-16
+"""
