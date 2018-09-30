@@ -116,8 +116,9 @@ formatted_ty_file(ballinfo_return[0], ballinfo_return[1])
 
 
 """
-Testen fungerer i b).
-c) genererer eigen fil.
+Testen fungerer i b)
+
+c) genererer eigen fil
 
 TERMINAL> python ball_file_read_write.py
 

@@ -17,33 +17,29 @@ import matplotlib.pyplot as plt
 
 
 def y_osc(t):
-	A = -0.3 #m
-	k = 4   #kg/s^2
+	A = -0.3 	 #m
+	k = 4   	 #kg/s^2
 	gamma = 0.15 #s^-1
-	m = 9   #kg
+	m = 9   	 #kg
 
 	return A*np.e**(-gamma*t)*np.cos(np.sqrt(k/m)*t)
 
 
 N = 100
-index_set = range(N+1)
 
 """
 a)
 Lag to tomme arrays t_array og y_array av lengde 101. Bruk en for loop til å fylle dem med
 tidsverdier i intervallet [0 s, 25 s], og korresponderende y(t) verdier
+"""
 
-
-t_array = np.zeros(len(index_set))
-y_array = np.zeros(len(index_set))
+index_set = range(N+1)
+t_array_a = np.zeros(len(index_set))
+y_array_a = np.zeros(len(index_set))
 
 for i in index_set:
-	t_array[i]=i*25/(N)
-	y_array[i]=y_osc(t_array[i])
-
-for t,y in zip(t_array, y_array):
-	print ('%2.3f, %2.3f' %(t,y))
-"""
+	t_array_a[i]=i*25/(N)
+	y_array_a[i]=y_osc(t_array_a[i])
 
 """
 b)
@@ -52,11 +48,28 @@ send den inn i en funksjon y(t) for å generere verdiene i y_array. Programmet d
 tidspunkt ikke inneholde noen loops.
 """
 
-t_array = np.linspace(0, 25, 101)
-y_array = y_osc(t_array)
-for t,y in zip(t_array, y_array):
-	print ('%2.3f, %2.3f' %(t,y))
+t_array_b = np.linspace(0, 25, N+1)
+y_array_b = y_osc(t_array_b)
 
-plt.plot(t_array, y_array)
+
+
+"""
+c)
+Plott posisjonen til steinen mot tid i det gitte tidsintervallet. Bruk arrayene fra både deloppgave
+a) og b), og sjekk at grafene ligger helt oppå hverandre (sannsynligvis vil du ikke se den ene). Få
+korrekte enheter på begge akser.
+"""
+
+plt.title('Oscillerende fjær')
+plt.plot(t_array_a, y_array_a, label='for loop')
+plt.plot(t_array_b, y_array_b, 'r+', label='linspace')
+plt.xlabel('t')
+plt.ylabel('y')
+plt.legend()
 
 plt.show()
+
+"""
+Programmet produserer ein graf som ser korrekt ut.
+Ingen output i terminal.
+"""
