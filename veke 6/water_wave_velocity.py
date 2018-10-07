@@ -43,5 +43,5 @@ plt.grid()
 plt.show()
 
 """
-To vindaugar med figurar som ser fine ut
+To vindauge med figurar som ser fine ut
 """
