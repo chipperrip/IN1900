@@ -33,11 +33,15 @@ large_c = c(large_lambdas)
 
 plt.title('Water-wave velocity')
 plt.plot(small_lambdas, small_c, label = 'l=[0.001,0.1]')
+plt.legend()
+# lag ny figur
+plt.figure()
+plt.title('Water-wave velocity')
 plt.plot(large_lambdas, large_c, 'r-', label = 'l=[1,2000]')
 plt.legend()
 plt.grid()
 plt.show()
 
 """
-Grafen ser grei ut, men ein må zoome in på det lisje intervallet for å sjå
+To vindaugar med figurar som ser fine ut
 """
