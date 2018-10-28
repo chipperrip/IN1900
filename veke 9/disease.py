@@ -32,14 +32,21 @@ plt.legend()
 plt.show()
 
 def disease_B(N, speed):
+	print('week  |  ill people')
 	xpp = 100
+	print('  0   |   100')
 	xp = 150
+	print('  1   |   150')
 	xn = 0
 
-	for n in range(N+1):
+	for n in range(2, N+1):
 		xn = (xp* 1/4) + (xpp * speed)
-		print()
+		xpp = xp
+		xp = xn
+		print('  %g   |   %g' %(n, xn))
+
 
 		#uferdig, seint ute. resten av denne oppgåva er triviell uansett
 
 
+disease_B(50, 4/3)
