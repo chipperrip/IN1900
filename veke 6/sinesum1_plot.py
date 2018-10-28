@@ -11,10 +11,10 @@ import matplotlib.pyplot as plt
 
 # Nøyaktig verdi som S(t;n) forsøker å nå
 def f(t,T=(2*np.pi)):
-    
+
     #trengs for å gjere funksjonen periodisk
     t = t % T
-    
+
     if 0 < t < T/2:
         return 1
     elif t == T/2:
@@ -31,7 +31,7 @@ def S(t,n,T=(2*np.pi)):
     return s *(4/np.pi)
 
 # lagar mange element slik at eg får fine kurver ved høg zoom
-t_list = np.linspace(0, 4*np.pi,20001)
+t_list = np.linspace(0, 2*np.pi,20001)
 
 s_list_1 = S(t_list,1)
 s_list_3 = S(t_list,3)
