@@ -17,10 +17,10 @@ def L2(x, n):
 
 def table(x):
     from math import log
-    print ('\nx=%g, ln(1+x)=%g' % (x, log(1+x)))
+    print('\nx=%g, ln(1+x)=%g' % (x, log(1+x)))
     for n in [1, 2, 10, 100, 500]:
         value, next, error = L2(x, n)
-        print ('n=%-4d %-10g  (next term: %8.2e  '\
+        print('n=%-4d %-10g  (next term: %8.2e  '\
               'error: %8.2e)' % (n, value, next, error))
 
 table(10)
@@ -45,8 +45,8 @@ def table2(x):
         approx, n = L3(x, epsilon=epsilon)
         exact = log(1+x)
         exact_error = exact - approx
-        print ('epsilon: %5.0e, exact error: %8.2e, n=%d' % \
+        print('epsilon: %5.0e, exact error: %8.2e, n=%d' % \
               (epsilon, exact_error, n))
 
-print ('\n\n')
+print('\n\n')
 table2(10)

@@ -20,11 +20,11 @@ def test_substances():
     densities_b = {}
 
     for line in infile:
-
+        #lagar verdiane for a
         words = line.split()
         densities_a[substance_a(words)] = float(words[-1])
 
-        # hentar
+        #verdiar for b
         s_d = substance_b(line)
         densities_b[s_d[0]] = s_d[1]
 
