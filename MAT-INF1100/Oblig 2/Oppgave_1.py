@@ -1,3 +1,15 @@
+"""
+MAT-INF 1100
+Oblig 2
+Hausten 2018
+
+Christopher Pavelich
+"""
+
+"""
+Oppgåve 1
+"""
+
 import matplotlib.pyplot as plt
 
 t = []
@@ -38,7 +50,7 @@ for j in range (1,N+1):
 		sum += (v[i-1]+v[i])*(t[i]-t[i-1])
 	s.append(sum/2)
 
-
+#teiknar figurer
 
 plt.title('Fart som funksjon av tid')
 plt.plot(t, v, label = 'v(t)')
@@ -66,3 +78,9 @@ plt.xlabel('tid')
 plt.legend()
 
 plt.show()
+
+"""
+Terminal> python Oppgave_1.py
+
+Her vert tre figurar teikna og vist av pyplot.
+"""
