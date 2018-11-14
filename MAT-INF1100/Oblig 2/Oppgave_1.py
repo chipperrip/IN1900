@@ -26,6 +26,20 @@ for i in range(N):
 #tar med baklengs deriverte av endepunktet i t_n
 a.append( (v[N]-v[N-1])/(t[N]-t[N-1]) )
 
+
+s = []
+#gitt verdi for s_0
+s.append(0)
+for j in range (1,N+1):
+    #nullstill summen mellom utreikning av areala ved gitt t
+	sum = 0
+	#vi finn trappesummane ved midpunktmetoden
+	for i in range (1,j+1):
+		sum += (v[i-1]+v[i])*(t[i]-t[i-1])
+	s.append(sum/2)
+
+
+
 plt.title('Fart som funksjon av tid')
 plt.plot(t, v, label = 'v(t)')
 plt.grid()
@@ -39,6 +53,15 @@ plt.title('Akselerasjon som funksjon av tid')
 plt.plot(t, a, label = 'a(t)')
 plt.grid()
 plt.ylabel('akselerasjon')
+plt.xlabel('tid')
+plt.legend()
+
+plt.figure()
+plt.title('Strekning som funksjon av tid')
+
+plt.plot(t, s, label = 's(t)')
+plt.grid()
+plt.ylabel('strekning')
 plt.xlabel('tid')
 plt.legend()
 
