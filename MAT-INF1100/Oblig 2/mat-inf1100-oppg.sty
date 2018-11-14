@@ -1,0 +1,408 @@
+%
+% Alternative sectioning commands.
+%
+%  The arguments of \verb=\@startsection= are given for reference:
+% % #1    #2     #3      #4          #5         #6
+% {NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE}
+%
+%
+\def\section{\@startsection{section}%
+        1\z@{-12\p@\@plus-9\p@}{6\p@}%
+        {\centering\normalfont\bfseries\fontsize{12}{14pt}\selectfont}}
+\def\subsection{\@startsection{subsection}%
+        2\z@{-9\p@\@plus-6\p@}{4\p@}%
+        {\centering\normalfont\bfseries}}
+
+\def\subsubsection{\@startsection{subsubsection}%
+        3\z@{9\p@\@plus6\p@}{-.5em}%
+        \rmdefault\itshape}
+
+% Style for captions.
+%
+\long\def\@makecaption#1#2{%
+\setbox\@tempboxa\vbox{\rm\fontsize{8}{10pt}\selectfont%
+    {\bf#1}\expandafter\@ifnotempty\expandafter
+        {\@cdr#2\@nil}{.\upshape\enspace#2}%
+%    \unskip\lparindent\par
+    \unskip\par
+     \global\setbox\@ne\lastbox}%
+\ifhbox\@ne % the normal case
+  \setbox\@ne\hbox{\unhbox\@ne\unskip\unskip\unpenalty}%
+\fi
+  \ifdim\wd\@tempboxa=\z@ % this means caption will fit on one line
+    \setbox\@ne\hbox to\columnwidth{\hss\box\@ne\hss}%
+  \else % tempboxa contained more than one line (or other vertical mode stuff)
+    \setbox\@ne\vbox{\unvbox\@tempboxa\parskip\z@skip
+        \noindent\unhbox\@ne\par}%
+\fi
+  \ifnum\@tempcnta<64 % if the float IS a figure...
+    \vskip 1pc%
+\box\@ne
+  \else % if the float IS NOT a figure...
+    \box\@ne
+    \vskip 1pc%
+  \fi
+\relax
+}
+
+%
+% Some auxiliary parameters.
+%
+\let\theorem@indent\noindent
+%\@addtoreset{figure}{chapter}
+%\@addtoreset{equation}{chapter}
+
+\newcommand{\uppersection}[1]{\section{\uppercase{#1}}}
+%% \theoremstyle{plain} %% This is the default
+%\theorembodyfont{\sl}
+%\theoremheaderfont{\bf}
+%
+% Customized Theoremstyle
+%
+\newtheoremstyle{LMtheorem}% name
+  {3pt}%      Space above
+  {3pt}%      Space below
+  {\slshape}%         Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {.5em}%     Space after thm head: " " = normal interword space;
+        %       \newline = linebreak
+  {}%         Thm head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{LMexample}% name
+  {4pt}%      Space above
+  {4pt}%      Space below
+  {\normalfont\fontsize{9}{10pt}\selectfont}%         Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries\normalsize}% Thm head font
+  {.}%        Punctuation after thm head
+  {.5em}%     Space after thm head: " " = normal interword space;
+        %       \newline = linebreak
+  {}%         Thm head spec (can be left empty, meaning `normal')
+
+\theoremstyle{LMtheorem}
+\newtheorem{theorem}{Teorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definisjon}
+\newtheorem{algorithm}[theorem]{Algoritme}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{LMexample}
+%\theorembodyfont{\rm\fontsize{8}{10pt}\selectfont}
+\newtheorem{example}[theorem]{Eksempel}
+
+%
+% A different qed-symbol.
+%
+\renewcommand{\qedsymbol}%
+{\hbox{\vrule width 5pt height 6pt depth 1.5pt \hskip 1pt}}
+
+%%
+%% Some numbering commands.
+%%
+%%\renewcommand{\labelenumi}{(\roman{enumi})}
+%\renewcommand{\thesection}{\thechapter.\arabic{section}}
+%\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+%\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+%\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+
+%
+% Define an excercise environment.
+%
+\newcounter{probnum}[section]
+\newcounter{subprobnum}[probnum]
+
+\newenvironment{oppgaver}{\vspace{12pt}\goodbreak \subsection*{Oppgaver}
+\begin{list}{\bf Oppgave \arabic{probnum}.\ }
+{\usecounter{probnum}\setlength{\itemsep}{6pt}}}{\end{list}\vfill\eject}
+
+\newcommand{\oppgave}{\item}
+
+\newenvironment{deloppgaver}{\begin{list}{\alph{subprobnum})}
+{\usecounter{subprobnum}\setlength{\topsep}{3pt}
+\setlength{\itemsep}{1.5pt}}}{\end{list}}
+
+\newcommand{\deloppgave}{\item}
+
+%
+% Change the proof environment
+%
+\DeclareRobustCommand{\qed}{%
+  \ifmmode % If math mode, assume display: omit penalty etc.
+  \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak
+  \fi
+  \quad\hbox{\qedsymbol}}
+%
+\renewenvironment{proof}[1][\proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep\bfseries
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \qed\endtrivlist
+}
+
+
+
+%\newmathalphabet*{\mib}{cmm}{b}{it}
+
+
+%Symbols for vectors and matrices
+
+\newcommand{\vzero}{{\boldsymbol{0}}}
+\newcommand{\va}{{\boldsymbol{a}}}
+\newcommand{\vb}{{\boldsymbol{b}}}
+\newcommand{\vc}{{\boldsymbol{c}}}
+\newcommand{\vd}{{\boldsymbol{d}}}
+\newcommand{\ve}{{\boldsymbol{e}}}
+\newcommand{\vf}{{\boldsymbol{f}}}
+\newcommand{\vg}{{\boldsymbol{g}}}
+\newcommand{\vh}{{\boldsymbol{h}}}
+\newcommand{\vi}{{\boldsymbol{i}}}
+\newcommand{\vj}{{\boldsymbol{j}}}
+\newcommand{\vk}{{\boldsymbol{k}}}
+\newcommand{\vl}{{\boldsymbol{l}}}
+\newcommand{\vm}{{\boldsymbol{m}}}
+\newcommand{\vn}{{\boldsymbol{n}}}
+\newcommand{\vo}{{\boldsymbol{o}}}
+\newcommand{\vp}{{\boldsymbol{p}}}
+\newcommand{\vq}{{\boldsymbol{q}}}
+\newcommand{\vr}{{\boldsymbol{r}}}
+\newcommand{\vs}{{\boldsymbol{s}}}
+\newcommand{\vt}{{\boldsymbol{t}}}
+\newcommand{\vu}{{\boldsymbol{u}}}
+\newcommand{\vv}{{\boldsymbol{v}}}
+\newcommand{\vw}{{\boldsymbol{w}}}
+\newcommand{\vx}{{\boldsymbol{x}}}
+\newcommand{\vy}{{\boldsymbol{y}}}
+\newcommand{\vz}{{\boldsymbol{z}}}
+
+\newcommand{\vA}{{\boldsymbol{A}}}
+\newcommand{\vB}{{\boldsymbol{B}}}
+\newcommand{\vC}{{\boldsymbol{C}}}
+\newcommand{\vD}{{\boldsymbol{D}}}
+\newcommand{\vE}{{\boldsymbol{E}}}
+\newcommand{\vF}{{\boldsymbol{F}}}
+\newcommand{\vG}{{\boldsymbol{G}}}
+\newcommand{\vH}{{\boldsymbol{H}}}
+\newcommand{\vI}{{\boldsymbol{I}}}
+\newcommand{\vJ}{{\boldsymbol{J}}}
+\newcommand{\vK}{{\boldsymbol{K}}}
+\newcommand{\vL}{{\boldsymbol{L}}}
+\newcommand{\vM}{{\boldsymbol{M}}}
+\newcommand{\vN}{{\boldsymbol{N}}}
+\newcommand{\vO}{{\boldsymbol{O}}}
+\newcommand{\vP}{{\boldsymbol{P}}}
+\newcommand{\vQ}{{\boldsymbol{Q}}}
+\newcommand{\vR}{{\boldsymbol{R}}}
+\newcommand{\vS}{{\boldsymbol{S}}}
+\newcommand{\vT}{{\boldsymbol{T}}}
+\newcommand{\vU}{{\boldsymbol{U}}}
+\newcommand{\vV}{{\boldsymbol{V}}}
+\newcommand{\vW}{{\boldsymbol{W}}}
+\newcommand{\vX}{{\boldsymbol{X}}}
+\newcommand{\vY}{{\boldsymbol{Y}}}
+\newcommand{\vZ}{{\boldsymbol{Z}}}
+
+\newcommand{\valpha}{{\boldsymbol{\alpha}}}
+\newcommand{\vgamma}{{\boldsymbol{\gamma}}}
+\newcommand{\vdelta}{{\boldsymbol{\delta}}}
+\newcommand{\vpsi}{{\boldsymbol{\psi}}}
+\newcommand{\vmu}{{\boldsymbol{\mu}}}
+\newcommand{\vomega}{{\boldsymbol{\omega}}}
+\newcommand{\vtheta}{{\boldsymbol{\theta}}}
+\newcommand{\vsigma}{{\boldsymbol{\sigma}}}
+\newcommand{\vtau}{{\boldsymbol{\tau}}}
+\newcommand{\vphi}{{\boldsymbol{\phi}}}
+\newcommand{\vrho}{{\boldsymbol{\rho}}}
+\newcommand{\vLambda}{{\boldsymbol{\Lambda}}}
+\newcommand{\vPi}{{\boldsymbol{\Pi}}}
+\newcommand{\vPhi}{{\boldsymbol{\Phi}}}
+\newcommand{\vPsi}{{\boldsymbol{\Psi}}}
+\newcommand{\vOmega}{{\boldsymbol{\Omega}}}
+\newcommand{\vDelta}{{\boldsymbol{\Delta}}}
+\newcommand{\vRho}{{\boldsymbol{\Rho}}}
+
+%Symbols for function spaces etc.
+
+\newcommand{\spa}{{\mathbb{a}}}
+\newcommand{\spb}{{\mathbb{b}}}
+\newcommand{\spc}{{\mathbb{c}}}
+\newcommand{\spd}{{\mathbb{d}}}
+\newcommand{\spe}{{\mathbb{e}}}
+\newcommand{\spf}{{\mathbb{f}}}
+\newcommand{\spg}{{\mathbb{g}}}
+\newcommand{\sph}{{\mathbb{h}}}
+\newcommand{\spi}{{\mathbb{i}}}
+\newcommand{\spj}{{\mathbb{j}}}
+\newcommand{\spk}{{\mathbb{k}}}
+\newcommand{\spl}{{\mathbb{l}}}
+\newcommand{\spm}{{\mathbb{m}}}
+\newcommand{\spn}{{\mathbb{n}}}
+\newcommand{\spo}{{\mathbb{o}}}
+\newcommand{\spp}{{\mathbb{p}}}
+\newcommand{\spq}{{\mathbb{q}}}
+\newcommand{\spr}{{\mathbb{r}}}
+\newcommand{\sps}{{\mathbb{s}}}
+\newcommand{\spt}{{\mathbb{t}}}
+\newcommand{\spu}{{\mathbb{u}}}
+\newcommand{\spv}{{\mathbb{v}}}
+\newcommand{\spw}{{\mathbb{w}}}
+\newcommand{\spx}{{\mathbb{x}}}
+\newcommand{\spy}{{\mathbb{y}}}
+\newcommand{\spz}{{\mathbb{z}}}
+
+\newcommand{\spA}{{\mathbb{A}}}
+\newcommand{\spB}{{\mathbb{B}}}
+\newcommand{\spC}{{\mathbb{C}}}
+\newcommand{\spD}{{\mathbb{D}}}
+\newcommand{\spE}{{\mathbb{E}}}
+\newcommand{\spF}{{\mathbb{F}}}
+\newcommand{\spG}{{\mathbb{G}}}
+\newcommand{\spH}{{\mathbb{H}}}
+\newcommand{\spI}{{\mathbb{I}}}
+\newcommand{\spJ}{{\mathbb{J}}}
+\newcommand{\spK}{{\mathbb{K}}}
+\newcommand{\spL}{{\mathbb{L}}}
+\newcommand{\spM}{{\mathbb{M}}}
+\newcommand{\spN}{{\mathbb{N}}}
+\newcommand{\spO}{{\mathbb{O}}}
+\newcommand{\spP}{{\mathbb{P}}}
+\newcommand{\spQ}{{\mathbb{Q}}}
+\newcommand{\spR}{{\mathbb{R}}}
+\newcommand{\spS}{{\mathbb{S}}}
+\newcommand{\spT}{{\mathbb{T}}}
+\newcommand{\spU}{{\mathbb{U}}}
+\newcommand{\spV}{{\mathbb{V}}}
+\newcommand{\spW}{{\mathbb{W}}}
+\newcommand{\spX}{{\mathbb{X}}}
+\newcommand{\spY}{{\mathbb{Y}}}
+\newcommand{\spZ}{{\mathbb{Z}}}
+
+\newcommand{\cA}{{\mathcal{A}}}
+\newcommand{\cB}{{\mathcal{B}}}
+\newcommand{\cC}{{\mathcal{C}}}
+\newcommand{\cD}{{\mathcal{D}}}
+\newcommand{\cE}{{\mathcal{E}}}
+\newcommand{\cF}{{\mathcal{F}}}
+\newcommand{\cG}{{\mathcal{G}}}
+\newcommand{\cH}{{\mathcal{H}}}
+\newcommand{\cI}{{\mathcal{I}}}
+\newcommand{\cJ}{{\mathcal{J}}}
+\newcommand{\cK}{{\mathcal{K}}}
+\newcommand{\cL}{{\mathcal{L}}}
+\newcommand{\cM}{{\mathcal{M}}}
+\newcommand{\cN}{{\mathcal{N}}}
+\newcommand{\cO}{{\mathcal{O}}}
+\newcommand{\cP}{{\mathcal{P}}}
+\newcommand{\cQ}{{\mathcal{Q}}}
+\newcommand{\cR}{{\mathcal{R}}}
+\newcommand{\cS}{{\mathcal{S}}}
+\newcommand{\cT}{{\mathcal{T}}}
+\newcommand{\cU}{{\mathcal{U}}}
+\newcommand{\cV}{{\mathcal{V}}}
+\newcommand{\cW}{{\mathcal{W}}}
+\newcommand{\cX}{{\mathcal{X}}}
+\newcommand{\cY}{{\mathcal{Y}}}
+\newcommand{\cZ}{{\mathcal{Z}}}
+
+\newcommand{\CC}{{\mathbb{C}}}
+\newcommand{\NN}{{\mathbb{N}}}
+\newcommand{\QQ}{{\mathbb{Q}}}
+\newcommand{\RR}{{\mathbb{R}}}
+\newcommand{\ZZ}{{\mathbb{Z}}}
+\newcommand{\supp}{\text{supp}}
+\newcommand{\cl}{\text{cl}}
+
+%
+% Symbols for programming
+%
+
+\newcommand{\tta}{{\tt a}}
+\newcommand{\ttb}{{\tt b}}
+\newcommand{\ttc}{{\tt c}}
+\newcommand{\ttd}{{\tt d}}
+\newcommand{\tte}{{\tt e}}
+\newcommand{\ttf}{{\tt f}}
+\newcommand{\ttg}{{\tt g}}
+\newcommand{\tth}{{\tt h}}
+\newcommand{\tti}{{\tt i}}
+\newcommand{\ttj}{{\tt j}}
+\newcommand{\ttk}{{\tt k}}
+\newcommand{\ttl}{{\tt l}}
+\newcommand{\ttm}{{\tt m}}
+\newcommand{\ttn}{{\tt n}}
+\newcommand{\tto}{{\tt o}}
+\newcommand{\ttp}{{\tt p}}
+\newcommand{\ttq}{{\tt q}}
+\newcommand{\ttr}{{\tt r}}
+\newcommand{\tts}{{\tt s}}
+\newcommand{\ttt}{{\tt t}}
+\newcommand{\ttu}{{\tt u}}
+\newcommand{\ttv}{{\tt v}}
+\newcommand{\ttw}{{\tt w}}
+\newcommand{\ttx}{{\tt x}}
+\newcommand{\tty}{{\tt y}}
+\newcommand{\ttz}{{\tt z}}
+
+\newcommand{\ttA}{{\tt A}}
+\newcommand{\ttB}{{\tt B}}
+\newcommand{\ttC}{{\tt C}}
+\newcommand{\ttD}{{\tt D}}
+\newcommand{\ttE}{{\tt E}}
+\newcommand{\ttF}{{\tt F}}
+\newcommand{\ttG}{{\tt G}}
+\newcommand{\ttH}{{\tt H}}
+\newcommand{\ttI}{{\tt I}}
+\newcommand{\ttJ}{{\tt J}}
+\newcommand{\ttK}{{\tt K}}
+\newcommand{\ttL}{{\tt L}}
+\newcommand{\ttM}{{\tt M}}
+\newcommand{\ttN}{{\tt N}}
+\newcommand{\ttO}{{\tt O}}
+\newcommand{\ttP}{{\tt P}}
+\newcommand{\ttQ}{{\tt Q}}
+\newcommand{\ttR}{{\tt R}}
+\newcommand{\ttS}{{\tt S}}
+\newcommand{\ttT}{{\tt T}}
+\newcommand{\ttU}{{\tt U}}
+\newcommand{\ttV}{{\tt V}}
+\newcommand{\ttW}{{\tt W}}
+\newcommand{\ttX}{{\tt X}}
+\newcommand{\ttY}{{\tt Y}}
+\newcommand{\ttZ}{{\tt Z}}
+%
+% Some useful control sequences.
+%
+
+\newcommand{\bern}{Bernstein}
+\newcommand{\bez}{B\'ezier}
+\newcommand{\aver}{\sum_{i=1}^m \lambda_i p_i}
+
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\vspan}{\operatorname{span}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\dist}{\operatorname{dist}}
+
+\newcommand{\mc}{MAT~100}
+\newcommand{\mcb}{MAT~100B}
+\newcommand{\icv}{INF~101}
+\newcommand{\im}{INF~1000}
+\newcommand{\mimc}{MAT-INF~1100}
+\newcommand{\mmc}{MAT~1100}
+
+
+
+
+
+
+
+
+
+
+
+ 
