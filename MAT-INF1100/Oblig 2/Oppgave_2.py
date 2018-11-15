@@ -53,7 +53,7 @@ for x in range (4, 11):
 	N = 2**x
 	h = T/N
 	print ('\t2**%g\t%g' %(x, abs(lin_pendel_euler(v0, theta0, g, L, N, h)[-1][N] \
-	 - analytisk_pendel(v0, theta0, g, L, N))))
+	 - analytisk_pendel(v0, theta0, g, L, t[-1]))))
 
 plt.plot(np.linspace(0,4,2**5+1), theta_n2_5, label = 'Euler n = 2**5')
 plt.plot(np.linspace(0,4,2**10+1), theta_n2_10, label = 'Euler n = 2**10')
@@ -74,13 +74,13 @@ plt.show()
 """
 Terminal> python Oppgave_2.py
      N      Error
-    2**4    27.3769
-    2**5    10.9774
-    2**6    3.84479
-    2**7    2.33724
-    2**8    3.32291
-    2**9    1.59162
-    2**10   3.19344
+    2**4    27.3939
+    2**5    10.9065
+    2**6    3.56439
+    2**7    1.31314
+    2**8    0.561413
+    2**9    0.259755
+    2**10   0.12498
 
 Programmet teiknar tre figurar i same vindu.
 
